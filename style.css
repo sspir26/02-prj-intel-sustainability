@@ -1,1 +1,73 @@
 /* Add your CSS here */
+/* ===== Intel-ish tokens ===== */
+:root{
+  --intel-blue:#0068B5;
+  --intel-electric:#00A3F5;
+  --text:#EAF2FF;
+  --muted:#BFD6FF;
+}
+html, body{ margin:0; padding:0; }
+body{ font-family: system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif; background:#050a15; color:var(--text); }
+
+/* ===== HERO ===== */
+.hero{
+  min-height:78vh; display:grid; place-items:center; position:relative; overflow:hidden;
+  background: radial-gradient(900px 450px at 15% 75%, rgba(0,163,245,0.25), transparent 60%),
+              radial-gradient(800px 400px at 85% 25%, rgba(0,104,181,0.25), transparent 60%),
+              linear-gradient(180deg, #07101f 0%, #050a15 100%);
+  isolation:isolate;
+}
+.hero-inner{
+  position:relative; z-index:2;
+  width:min(1100px,92vw); padding:2rem; border-radius:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.18);
+}
+.hero-badge{ display:inline-flex; align-items:center; gap:.5rem; color:var(--muted);
+  border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:.45rem .7rem; background:rgba(255,255,255,.06); }
+.hero-badge .dot{ width:.5rem; height:.5rem; border-radius:50%; background:var(--intel-electric); box-shadow:0 0 8px var(--intel-electric); }
+.hero-title{ margin:.8rem 0 .3rem; font-size:clamp(1.8rem,4vw,3.4rem); line-height:1.1; }
+.hero-subtitle{ color:var(--muted); max-width:60ch; }
+.hero-ctas{ display:flex; gap:.6rem; margin-top:1rem; flex-wrap:wrap; }
+.btn{ display:inline-flex; align-items:center; justify-content:center; padding:.8rem 1rem; border-radius:12px; text-decoration:none; font-weight:600; border:1px solid transparent; }
+.btn-primary{ background:linear-gradient(135deg, var(--intel-blue), var(--intel-electric)); color:#fff; box-shadow: 0 8px 24px rgba(0,104,181,.35); }
+.btn-ghost{ color:#d6e6ff; border-color:rgba(255,255,255,.25); }
+.hero-watermark{
+  position:absolute; right:4%; top:6%; width:min(40vw, 360px);
+  opacity:.06; filter:saturate(0) brightness(2); z-index:1; pointer-events:none;
+}
+
+/* ===== TIMELINE ===== */
+#timeline{ padding:2rem 0 3rem; width:min(1100px,92vw); margin-inline:auto; }
+#timeline h2{ font-size:clamp(1.4rem,3vw,2rem); margin:0 0 1rem; }
+
+.timeline .track{
+  display:flex; gap:1rem; overflow-x:auto; padding-bottom:1rem;
+  scroll-snap-type:x mandatory; /* desktop: snap cards nicely */
+}
+.timeline .track::-webkit-scrollbar{ height:10px; }
+.timeline .track::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.2); border-radius:6px; }
+
+.card{
+  min-width:320px; width:360px; background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18); border-radius:16px; overflow:hidden;
+  scroll-snap-align:center; transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{ transform: translateY(-4px); box-shadow: 0 12px 26px rgba(0,0,0,.35); }
+.card img{ width:100%; height:180px; object-fit:cover; display:block; }
+.card-body{ padding:1rem; }
+.card h3{ margin:.2rem 0 .4rem; font-size:1.1rem; }
+.card .teaser{ color:#BFD6FF; margin:0 0 .4rem; }
+.card .more{ color:#DCE9FF; margin:0; max-height:0; overflow:hidden; transition:max-height .25s ease; }
+/* reveal extra details on hover/focus (interactivity requirement) */
+.card:hover .more, .card:focus-within .more{ max-height:120px; }
+
+/* Mobile: stack vertically (responsiveness requirement) */
+@media (max-width: 700px){
+  .timeline .track{ display:grid; grid-template-columns:1fr; overflow:visible; }
+  .card{ width:100%; min-width:0; }
+}
+
+/* small tweak for buttons on narrow screens */
+@media (max-width:880px){ .hero-inner{ padding:1.2rem; } }
