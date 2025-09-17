@@ -71,3 +71,39 @@ body{ font-family: system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif; backgr
 
 /* small tweak for buttons on narrow screens */
 @media (max-width:880px){ .hero-inner{ padding:1.2rem; } }
+/* === LEVELUP: Scroll Snap polish === */
+.timeline .track{
+  /* you already have flex + overflow-x; keep those */
+  scroll-snap-type: x mandatory;     /* ensure it snaps each card */
+  scroll-behavior: smooth;           /* smooth left/right scrolling */
+  overscroll-behavior-x: contain;    /* stop bounce passing to page */
+  padding-inline: 1rem;              /* gives edges some breathing room */
+  scroll-padding-inline: 1rem;       /* snap considers the padding */
+}
+
+.card{
+  scroll-snap-align: start;          /* snap card’s left edge to track */
+  scroll-snap-stop: always;          /* don’t skip cards during fast flicks */
+}
+/* === SNAP FIX (authoritative) — put this at the VERY BOTTOM of style.css === */
+.timeline .track{
+  display: flex;                 /* horizontal row */
+  gap: 1rem;
+  overflow-x: auto;              /* enable horizontal scrolling */
+  padding-inline: 1rem;          /* breathing room at edges */
+  scroll-snap-type: x mandatory; /* enable snapping */
+  scroll-padding-inline: 1rem;   /* align snap with padding */
+  scroll-behavior: smooth;       /* smooth scroll feel */
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card{
+  min-width: 420px;              /* force overflow so snapping can happen */
+  width: 420px;                  /* keep a fixed width for stronger feel */
+  scroll-snap-align: start;      /* snap each card’s left edge */
+  scroll-snap-stop: always;      /* don’t skip cards on fast swipes */
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
+}
+/* TEMP: remove later */
+
