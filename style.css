@@ -105,5 +105,39 @@ body{ font-family: system-ui, Segoe UI, Roboto, Inter, Arial, sans-serif; backgr
   scroll-snap-stop: always;      /* don’t skip cards on fast swipes */
   transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s ease;
 }
+/* --- Accessibility tweaks --- */
+:root{
+  /* Slightly darker link/button color to improve contrast */
+  --brand-blue: #0b5ed7; /* darker than Bootstrap's default */
+  --brand-blue-dark: #0a58ca;
+}
+
+/* Body text readability */
+body{
+  color:#111;
+  line-height:1.6;
+}
+
+/* Links are underlined by default for clarity */
+a{
+  text-decoration: underline;
+}
+
+/* Buttons: ensure strong contrast */
+.btn-primary{
+  background-color: var(--brand-blue);
+  border-color: var(--brand-blue-dark);
+}
+
+/* Always show a visible focus style for keyboard navigation */
+:focus-visible{
+  outline: 3px solid #ffbf47; /* high-contrast amber */
+  outline-offset: 2px;
+}
+
+/* Make small, low-contrast text a bit darker */
+.text-muted{
+  color:#495057 !important;
+}
 /* TEMP: remove later */
 
