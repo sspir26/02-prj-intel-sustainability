@@ -249,5 +249,34 @@
     </nav>
   </div>
 </footer>
+  <!-- Bootstrap JS (required for some components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- RTL/LTR toggle -->
+<button type="button" class="btn btn-outline-secondary position-fixed top-0 end-0 m-3" id="dirToggle" aria-pressed="false" aria-label="Toggle reading direction">
+  RTL
+</button>
+<script>
+  (function(){
+    const btn = document.getElementById('dirToggle');
+    const html = document.documentElement;
+    const link = document.getElementById('bootstrap-css');
+
+    function applyDir(dir){
+      html.setAttribute('dir', dir);
+      const base = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/';
+      link.href = dir === 'rtl' ? base + 'bootstrap.rtl.min.css' : base + 'bootstrap.min.css';
+      btn.textContent = dir.toUpperCase();
+      btn.setAttribute('aria-pressed', dir === 'rtl' ? 'true' : 'false');
+    }
+
+    // Start in LTR by default; click to switch.
+    applyDir('ltr');
+
+    btn.addEventListener('click', () => {
+      applyDir(html.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl');
+    });
+  })();
+</script>
 </body>
 </html>
