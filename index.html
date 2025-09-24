@@ -302,7 +302,36 @@
 </footer>
   <!-- Bootstrap JS (required for some components) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ACCORDION: open on hash START -->
+<script>
+  (function () {
+    function openPanelFromHash() {
+      const key = (location.hash || '').slice(1); // remove leading '#'
+      const map = {
+        'circular': 'collapseCircular',
+        'water-energy': 'collapseWater',
+        'global-impact': 'collapseImpact'
+      };
+      const targetId = map[key];
+      if (!targetId) return;
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      const collapse = new bootstrap.Collapse(target, { toggle: false });
+      collapse.show();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
+    // Open on load if URL already has a hash (e.g., …/#water-energy)
+    window.addEventListener('load', openPanelFromHash);
+    // Open whenever the hash changes (e.g., after clicking a Learn More link)
+    window.addEventListener('hashchange', openPanelFromHash);
+
+    // Also trigger right after clicking the three Learn More links
+    document.querySelectorAll('a[href="#circular"], a[href="#water-energy"], a[href="#global-impact"]')
+      .forEach(a => a.addEventListener('click', () => setTimeout(openPanelFromHash, 0)));
+  })();
+</script>
+<!-- ACCORDION: open on hash END -->
 <!-- RTL/LTR toggle -->
 <!-- RTL/LTR toggle + auto-detect based on document language -->
 <button type="button" class="btn btn-outline-secondary position-fixed top-0 end-0 m-3" id="dirToggle" aria-pressed="false" aria-label="Toggle reading direction">
